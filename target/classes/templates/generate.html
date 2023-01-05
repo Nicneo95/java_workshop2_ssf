@@ -10,6 +10,7 @@
     <h1>How many number do you wish to generate</h1>
     <!-- form action # to submit a void -->
     <!-- form action on submit will go to http://localhost:8080/rand/generate on browser -->
+    <!-- object model generateObj that passes the value to controller -->
     <form
       action="#"
       th:action="@{/rand/generate}" 
@@ -17,8 +18,9 @@
       method="post"
     >
     <!-- when number is key in it will be store in numberVal -->
+    <!-- to access numberVal we can use *{numberVal} or ${generateObj.numberVal} -->
       <p>
-        <input type="text" th:field="${generateObj.numberVal}" />
+        <input type="text" th:field="*{numberVal}" />
         <input type="submit" value="Generate" />
       </p>
     </form>

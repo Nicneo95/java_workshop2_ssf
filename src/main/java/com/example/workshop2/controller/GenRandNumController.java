@@ -19,57 +19,61 @@ import com.example.workshop2.models.Generate;
 
 // annotate as controller
 @Controller
-// requestMapping is also a GET Method use for Class Level 
+// requestMapping is also a GET Method use for Class Level
 @RequestMapping(path = "/rand")
 public class GenRandNumController {
     // http://localhost:8080/rand/show will display generate.html
-    @GetMapping (path = "/show")
-    // Model is use to pass value g to view page 
+    @GetMapping(path = "/show")
+    // Model is use to pass value g to view page
     public String showRandForm(Model model) {
         // instantiate the generate object
         Generate g = new Generate();
-        // need to addAttribute() to bind to view page 
-        // generateObj is the attribute name, g is the value we want to pass to view page
+        // need to addAttribute() to bind to view page
+        // generateObj is the attribute name, g is the value we want to pass to view
+        // page
         model.addAttribute("generateObj", g);
         return "generate"; // need to create a template called generate.html
     }
 
-    // when we submit a form we use PostMapping 
-    @PostMapping (path = "/generate")
-    // bind form data with generate 
+    // when we submit a form we use PostMapping
+    @PostMapping(path = "/generate")
+    // bind form data with generate
     public String postRandNum(@ModelAttribute Generate generate, Model model) {
-        this.randomizeNum(model,generate.getNumberVal());
+        this.randomizeNum(model, generate.getNumberVal());
         return "result"; // need to create a template called result.html
     }
 
-    // randomizeNum() is the business logic 
-    private void randomizeNum(Model model,int noOfGenerateNo){
+    // randomizeNum() is the business logic
+    private void randomizeNum(Model model, int noOfGenerateNo) {
         // maximum number we generate cannot be more than 30
         int maxGenNo = 30;
-        String[] imgNumbers = new String[maxGenNo+1];
+        // +1 because include 30
+        String[] imgNumbers = new String[maxGenNo + 1];
 
         // Validate only accept greater than 0 less than equal to 30 in the form field
-        if(noOfGenerateNo < 1 || noOfGenerateNo > maxGenNo){
+        if (noOfGenerateNo < 1 || noOfGenerateNo > maxGenNo) {
             throw new RandomNumException();
         }
 
-        // generate all the number images store it 
-        // to the imgNumbers array 
-        for(int i =0 ; i < maxGenNo+1; i++){
+        // generate all the number images store it
+        // to the imgNumbers array
+        for (int i = 0; i < maxGenNo + 1; i++) {
             imgNumbers[i] = "number" + i + ".jpg";
         }
-
+        // create a list to store all the image 
         List<String> selectedImg = new ArrayList<String>();
+        // randomly selecting the image 
         Random rnd = new Random();
+        // use set because we don't want number image to be duplicated twice 
         Set<Integer> uniqueResult = new LinkedHashSet<Integer>();
-        while(uniqueResult.size() < noOfGenerateNo){
-            Integer resultOgfRand = rnd.nextInt(maxGenNo);
-            uniqueResult.add(resultOgfRand);
+        while (uniqueResult.size() < noOfGenerateNo) {
+            Integer resultOfRand = rnd.nextInt(maxGenNo);
+            uniqueResult.add(resultOfRand);
         }
 
         Iterator<Integer> it = uniqueResult.iterator();
         Integer currElem = null;
-        while(it.hasNext()){
+        while (it.hasNext()) {
             currElem = it.next();
             selectedImg.add(imgNumbers[currElem.intValue()]);
         }
