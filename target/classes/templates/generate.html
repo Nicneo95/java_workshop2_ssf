@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>How many number do you wish to generate</h1>
+    <!-- form action # to submit a void -->
+    <!-- form action on submit will go to http://localhost:8080/rand/generate on browser -->
+    <form
+      action="#"
+      th:action="@{/rand/generate}" 
+      th:object="${generateObj}"
+      method="post"
+    >
+    <!-- when number is key in it will be store in numberVal -->
+      <p>
+        <input type="text" th:field="${generateObj.numberVal}" />
+        <input type="submit" value="Generate" />
+      </p>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+com/example/workshop2/controller/GenRandNumController.class
+com/example/workshop2/Workshop2Application.class
+com/example/workshop2/exception/RandomNumException.class
+com/example/workshop2/models/Generate.class
