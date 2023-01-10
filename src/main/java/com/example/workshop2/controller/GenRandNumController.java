@@ -37,9 +37,10 @@ public class GenRandNumController {
 
     // when we submit a form we use PostMapping
     @PostMapping(path = "/generate")
-    // bind form data with generate
-    public String postRandNum(@ModelAttribute Generate generate, Model model) {
-        this.randomizeNum(model, generate.getNumberVal());
+    // bind form data with g object 
+    public String postRandNum(@ModelAttribute Generate g, Model model) {
+        // g.getNumberVal() - getNumberVal is inside generate object
+        this.randomizeNum(model, g.getNumberVal());
         return "result"; // need to create a template called result.html
     }
 
@@ -49,7 +50,7 @@ public class GenRandNumController {
         int maxGenNo = 30;
         // +1 because include 30
         String[] imgNumbers = new String[maxGenNo + 1];
-
+        
         // Validate only accept greater than 0 less than equal to 30 in the form field
         if (noOfGenerateNo < 1 || noOfGenerateNo > maxGenNo) {
             throw new RandomNumException();

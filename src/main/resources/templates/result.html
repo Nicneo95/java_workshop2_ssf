@@ -10,7 +10,7 @@
     <h1>Your list of <span th:text=${numberRandomNum}></span> Random Numbers </h1>
     <ul th:each="numberImg: ${randNumResult}">
         <li th:text="${numberImg}"></li>
-        <img th:src="@{${'/images' + numberImg}}" width="250" height="250"/>
+        <img th:src="@{${'/images' + '/' + numberImg}}" width="250" height="250"/>
     </ul>
 </body>
 </html>
